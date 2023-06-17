@@ -3,6 +3,7 @@ package com.github.allanfs.balanceapi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @PostMapping
-    public Transaction createTransaction(NewTransactionRequest request) {
+    public Transaction createTransaction(@RequestBody NewTransactionRequest request) {
         return transactionService.createTransaction(request.parseToTransaction());
     }
 
