@@ -13,3 +13,7 @@ Content-Type: application/json
 ###
 
 GET Http://localhost:8080/transaction
+
+###
+
+DELETE Http://localhost:8080/transaction/1

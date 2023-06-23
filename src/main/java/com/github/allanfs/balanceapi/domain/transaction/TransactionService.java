@@ -30,4 +30,8 @@ public class TransactionService {
         BeanUtils.copyProperties(transactionRepository.findAll(), transactions);
         return transactions;
     }
+
+    public void deleteTransaction(Long id) {
+        transactionRepository.deleteById(id);
+    }
 }
