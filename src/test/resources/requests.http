@@ -1,0 +1,15 @@
+POST Http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+    "name": "Condominio",
+    "value": 80.5,
+    "nature": "D",
+    "expiresIn": "2021-09-30T01:00:00.000Z",
+    "isPaid": true,
+    "paidAt": "2021-09-30T00:02:00.000Z"
+}
+
+###
+
+GET Http://localhost:8080/transaction
