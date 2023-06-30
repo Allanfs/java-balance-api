@@ -13,9 +13,9 @@ public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
-    public com.github.allanfs.balanceapi.database.entity.Transaction createTransaction(Transaction transaction) {
-        com.github.allanfs.balanceapi.database.entity.Transaction transactionEntity = new com.github.allanfs.balanceapi.database.entity.Transaction();
-        transactionEntity.setAmount(transaction.getValue());
+    public com.github.allanfs.balanceapi.database.entity.TransactionEntity createTransaction(Transaction transaction) {
+        com.github.allanfs.balanceapi.database.entity.TransactionEntity transactionEntity = new com.github.allanfs.balanceapi.database.entity.TransactionEntity();
+        transactionEntity.setAmount(transaction.getAmount());
         transactionEntity.setExpiresIn(transaction.getExpiresIn());
         transactionEntity.setPaid(transaction.isPaid());
         transactionEntity.setName(transaction.getName());
@@ -25,8 +25,8 @@ public class TransactionService {
         return transactionRepository.save(transactionEntity);
     }
 
-    public Iterable<com.github.allanfs.balanceapi.database.entity.Transaction> getTransactions() {
-        Iterable<com.github.allanfs.balanceapi.database.entity.Transaction> transactions = transactionRepository.findAll();
+    public Iterable<com.github.allanfs.balanceapi.database.entity.TransactionEntity> getTransactions() {
+        Iterable<com.github.allanfs.balanceapi.database.entity.TransactionEntity> transactions = transactionRepository.findAll();
         BeanUtils.copyProperties(transactionRepository.findAll(), transactions);
         return transactions;
     }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.allanfs.balanceapi.database.entity.Transaction;
+import com.github.allanfs.balanceapi.database.entity.TransactionEntity;
 import com.github.allanfs.balanceapi.domain.transaction.TransactionService;
 import com.github.allanfs.balanceapi.http.model.NewTransactionRequest;
 
@@ -22,12 +22,12 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @PostMapping
-    public Transaction createTransaction(@RequestBody NewTransactionRequest request) {
+    public TransactionEntity createTransaction(@RequestBody NewTransactionRequest request) {
         return transactionService.createTransaction(request.parseToTransaction());
     }
 
     @GetMapping
-    public Iterable<Transaction> getTransactions() {
+    public Iterable<TransactionEntity> getTransactions() {
         return transactionService.getTransactions();
     }
 

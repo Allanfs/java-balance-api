@@ -17,3 +17,17 @@ GET Http://localhost:8080/transaction
 ###
 
 DELETE Http://localhost:8080/transaction/1
+
+
+###
+
+POST Http://localhost:8080/wallet
+Content-Type: application/json
+
+{
+    "name": "Viagem Floripa"
+}
+
+###
+
+GET Http://localhost:8080/wallet

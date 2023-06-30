@@ -18,7 +18,7 @@ public class NewTransactionRequest {
     public Transaction parseToTransaction() {
         Transaction transaction = new Transaction();
         transaction.setName(this.name);
-        transaction.setValue(this.value);
+        transaction.setAmount(this.value);
         transaction.setNature(this.nature);
         transaction.setExpiresIn(this.expiresIn);
         transaction.setPaid(this.isPaid);

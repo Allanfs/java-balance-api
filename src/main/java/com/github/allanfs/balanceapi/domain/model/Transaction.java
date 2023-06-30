@@ -8,7 +8,7 @@ import lombok.Data;
 public class Transaction {
     private int id;
     private String name;
-    private float value;
+    private float amount;
     private String nature;
     private Date expiresIn;
     private boolean isPaid;
