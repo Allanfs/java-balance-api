@@ -1,6 +1,8 @@
 package com.github.allanfs.balanceapi.database.entity;
 
 
+import com.github.allanfs.balanceapi.domain.model.TransactionNature;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +17,7 @@ public class TransactionEntity {
     private long id;
     private String name;
     private float amount;
-    private String nature;
+    private TransactionNature nature;
     private java.util.Date expiresIn;
     private boolean isPaid;
     private java.util.Date paidAt;

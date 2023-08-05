@@ -3,6 +3,7 @@ package com.github.allanfs.balanceapi.http.model;
 import java.util.Date;
 
 import com.github.allanfs.balanceapi.domain.model.Transaction;
+import com.github.allanfs.balanceapi.domain.model.TransactionNature;
 
 import lombok.Data;
 
@@ -10,7 +11,7 @@ import lombok.Data;
 public class NewTransactionRequest {
     private String name;
     private float value;
-    private String nature;
+    private TransactionNature nature;
     private Date expiresIn;
     private boolean isPaid;
     private Date paidAt;

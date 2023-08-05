@@ -9,7 +9,7 @@ public class Transaction {
     private int id;
     private String name;
     private float amount;
-    private String nature;
+    private TransactionNature nature;
     private Date expiresIn;
     private boolean isPaid;
     private Date paidAt;
