@@ -1,5 +1,7 @@
 package com.github.allanfs.balanceapi;
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +31,11 @@ public class TransactionController {
     @GetMapping
     public Iterable<TransactionEntity> getTransactions() {
         return transactionService.getTransactions();
+    }
+
+    @GetMapping("/year/{year}/month/{month}")
+    public Iterable<TransactionEntity> getTransactionsInMonth(@PathVariable int year, @PathVariable int month) throws ParseException {
+        return transactionService.getTransactionsByMonth(year, month);
     }
 
     @DeleteMapping("/{id}")

@@ -1,9 +1,15 @@
 package com.github.allanfs.balanceapi.domain.transaction;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.allanfs.balanceapi.database.entity.TransactionEntity;
 import com.github.allanfs.balanceapi.database.repository.TransactionRepository;
 import com.github.allanfs.balanceapi.domain.model.Transaction;
 
@@ -29,6 +35,17 @@ public class TransactionService {
         Iterable<com.github.allanfs.balanceapi.database.entity.TransactionEntity> transactions = transactionRepository.findAll();
         BeanUtils.copyProperties(transactionRepository.findAll(), transactions);
         return transactions;
+    }
+
+    public Iterable<TransactionEntity> getTransactionsByMonth(Integer year, Integer month) throws ParseException {
+        SimpleDateFormat sdf =  new SimpleDateFormat("yyyy-MM-dd");
+        Date monthStart = sdf.parse(year.toString() + "-"+month.toString()+"-01");
+        
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(monthStart); 
+        calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
+        
+        return transactionRepository.findAllByCreatedAtBetween(monthStart, calendar.getTime());
     }
 
     public void deleteTransaction(Long id) {
