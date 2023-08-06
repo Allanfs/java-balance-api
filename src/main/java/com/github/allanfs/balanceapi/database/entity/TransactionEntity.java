@@ -1,6 +1,8 @@
 package com.github.allanfs.balanceapi.database.entity;
 
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.github.allanfs.balanceapi.domain.model.TransactionNature;
 
 import jakarta.persistence.Entity;
@@ -21,5 +23,7 @@ public class TransactionEntity {
     private java.util.Date expiresIn;
     private boolean isPaid;
     private java.util.Date paidAt;
+    @CreationTimestamp
+    private java.util.Date createdAt;
     
 }
