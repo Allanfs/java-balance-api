@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
