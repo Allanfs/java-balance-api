@@ -1,0 +1,16 @@
+services:
+  balance-database:
+    container_name: balance-database
+    hostname: balance-database
+    image: postgres:15.3-alpine3.18
+    environment:
+      - POSTGRES_DB=balance
+      - POSTGRES_PASSWORD=balance
+    ports:
+      - 5432:5432
+    volumes:
+      - db-balance:/var/lib/postgresql/data
+
+volumes:
+  db-balance:
+    external: true
