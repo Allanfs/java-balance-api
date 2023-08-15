@@ -2,6 +2,7 @@ package com.github.allanfs.balanceapi;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +35,15 @@ public class TransactionController {
     }
     
     @GetMapping
-    public TransactionHttp getTransactions() {
+    public TransactionHttp getTransactions() throws ParseException {
         List<TransactionEntity> lte = new ArrayList<TransactionEntity>();
         float totalDebit = 0f;
         float totalCredit = 0f;
 
-        for (TransactionEntity transaction : transactionService.getTransactions()) {
+        Calendar calendar = Calendar.getInstance();
+        
+        Iterable<TransactionEntity> ite = transactionService.getTransactionsByMonth(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1);
+        for (TransactionEntity transaction : ite) {
             lte.add(transaction);
             if (transaction.getNature().equals(TransactionNature.CREDIT)) {
                 totalCredit += transaction.getAmount();
