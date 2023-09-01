@@ -5,3 +5,7 @@
 # API
 - Path Variable in Spring | https://www.baeldung.com/spring-pathvariable
 - Request Param | https://www.baeldung.com/spring-request-param
+
+# Test
+- https://devwithus.com/java-spring-mock-repository/
+- Disable Test in Junit 5 | https://mkyong.com/junit5/junit-5-how-to-disable-tests/
