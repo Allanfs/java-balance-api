@@ -9,7 +9,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
 import lombok.Data;
 
 @Entity
@@ -27,10 +26,4 @@ public class TransactionEntity {
     @CreationTimestamp
     private java.util.Date createdAt;
 
-    @Transient
-    private TransactionRecurrency recurrency;
-
-    public boolean hasRecurrency() {
-        return recurrency == null && recurrency.getDay() > 1;
-    }
 }
