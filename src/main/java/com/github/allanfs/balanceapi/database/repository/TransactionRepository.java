@@ -8,5 +8,5 @@ import com.github.allanfs.balanceapi.database.entity.TransactionEntity;
 
 public interface TransactionRepository extends CrudRepository<TransactionEntity, Long>{
 
-    Iterable<TransactionEntity> findAllByCreatedAtBetween(Date start, Date end);
+    Iterable<TransactionEntity> findAllByExpiresInBetween(Date start, Date end);
 }

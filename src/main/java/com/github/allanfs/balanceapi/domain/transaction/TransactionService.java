@@ -45,7 +45,7 @@ public class TransactionService {
         calendar.setTime(monthStart); 
         calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
         
-        return transactionRepository.findAllByCreatedAtBetween(monthStart, calendar.getTime());
+        return transactionRepository.findAllByExpiresInBetween(monthStart, calendar.getTime());
     }
 
     public void deleteTransaction(Long id) {
