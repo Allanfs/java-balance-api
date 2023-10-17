@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.github.allanfs.balanceapi.domain.model.Transaction;
 import com.github.allanfs.balanceapi.domain.model.TransactionNature;
+import com.github.allanfs.balanceapi.domain.model.TransactionRecurrency;
 
 import lombok.Data;
 
@@ -15,6 +16,8 @@ public class NewTransactionRequest {
     private Date expiresIn;
     private boolean isPaid;
     private Date paidAt;
+    private boolean hasRecurrency;
+    private TransactionRecurrency recurrency;
 
     public Transaction parseToTransaction() {
         Transaction transaction = new Transaction();

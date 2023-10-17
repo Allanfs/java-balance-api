@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.github.allanfs.balanceapi.database.entity.TransactionEntity;
 import com.github.allanfs.balanceapi.database.repository.TransactionRepository;
 import com.github.allanfs.balanceapi.domain.model.Transaction;
+import com.github.allanfs.balanceapi.mappers.TransactionMapper;
 
 @Service
 public class TransactionService {
@@ -19,7 +20,16 @@ public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    @Autowired
+    private RecurrencyService recurrencyService;
     public com.github.allanfs.balanceapi.database.entity.TransactionEntity createTransaction(Transaction transaction) {
+        if (transaction.hasRecurrency()) {
+            var transactions = recurrencyService.createTransactions(transaction.getRecurrency());
+            var savedTransactions = transactionRepository.saveAll(TransactionMapper.INSTANCE.transactionsToEntityList(transactions));
+
+            return savedTransactions.iterator().next();
+        }
+        
         com.github.allanfs.balanceapi.database.entity.TransactionEntity transactionEntity = new com.github.allanfs.balanceapi.database.entity.TransactionEntity();
         transactionEntity.setAmount(transaction.getAmount());
         transactionEntity.setExpiresIn(transaction.getExpiresIn());

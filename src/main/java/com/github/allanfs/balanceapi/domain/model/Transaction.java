@@ -13,4 +13,10 @@ public class Transaction {
     private Date expiresIn;
     private boolean isPaid;
     private Date paidAt;
+
+    private TransactionRecurrency recurrency;
+
+    public boolean hasRecurrency() {
+        return recurrency != null;
+    }
 }

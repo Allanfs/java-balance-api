@@ -2,15 +2,15 @@ package com.github.allanfs.balanceapi.domain.transaction;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.stereotype.Service;
 
-import com.github.allanfs.balanceapi.domain.model.Recurrency;
 import com.github.allanfs.balanceapi.domain.model.Transaction;
 import com.github.allanfs.balanceapi.domain.model.TransactionRecurrency;
 
+@Service
 public class RecurrencyService {
     
     List<Transaction> createTransactions(TransactionRecurrency rec) {
@@ -28,8 +28,14 @@ public class RecurrencyService {
             }
             transactions.add(transaction);
 
+
+            Transaction prevTransaction= transaction;
+            if (i > 1) {
+                prevTransaction = transactions.get(i-2);
+                transaction.setExpiresIn( rec.getRecurrency().Increment(prevTransaction.getExpiresIn()) );
+            }
+
             transaction.setName(newInstallmentName(transaction.getName(),i, rec.getTotalInstallments()));
-            transaction.setExpiresIn(newExpireDate(rec.getRecurrency(), transaction.getExpiresIn()));
             transaction.setAmount(installmentAmount);
 
         }
@@ -42,10 +48,4 @@ public class RecurrencyService {
         sb.append(current).append("/").append(total);
         return sb.toString(); 
     }
-
-    private Date newExpireDate(Recurrency recurrency, Date origExpire) {
-        // TODO: transformar isso numa interface de Recurrency para cada enum implementar o seu
-        return origExpire;
-    }
-
 }
