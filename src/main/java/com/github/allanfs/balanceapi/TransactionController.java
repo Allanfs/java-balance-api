@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.allanfs.balanceapi.database.entity.TransactionEntity;
 import com.github.allanfs.balanceapi.domain.model.TransactionNature;
 import com.github.allanfs.balanceapi.domain.transaction.TransactionService;
+import com.github.allanfs.balanceapi.http.model.HttpTransactionMapper;
 import com.github.allanfs.balanceapi.http.model.NewTransactionRequest;
 import com.github.allanfs.balanceapi.http.model.TransactionHttp;
 import com.github.allanfs.balanceapi.http.model.TransactionSummary;
@@ -31,7 +32,7 @@ public class TransactionController {
     
     @PostMapping
     public TransactionEntity createTransaction(@RequestBody NewTransactionRequest request) {
-        return transactionService.createTransaction(request.parseToTransaction());
+        return transactionService.createTransaction(HttpTransactionMapper.INSTANCE.toModelTransaction(request));
     }
     
     @GetMapping

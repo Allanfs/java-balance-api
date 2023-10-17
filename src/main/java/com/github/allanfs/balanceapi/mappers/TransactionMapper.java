@@ -1,5 +1,7 @@
 package com.github.allanfs.balanceapi.mappers;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -13,4 +15,6 @@ public interface TransactionMapper {
     Transaction transactionEntityToTransaction(TransactionEntity transactionEntity);
     
     TransactionEntity transactionToTransactionEntity(Transaction transaction);
+
+    List<TransactionEntity> transactionsToEntityList(List<Transaction> transactions);
 }
