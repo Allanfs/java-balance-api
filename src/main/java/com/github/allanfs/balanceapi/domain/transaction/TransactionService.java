@@ -24,7 +24,7 @@ public class TransactionService {
     private RecurrencyService recurrencyService;
     public com.github.allanfs.balanceapi.database.entity.TransactionEntity createTransaction(Transaction transaction) {
         if (transaction.hasRecurrency()) {
-            var transactions = recurrencyService.createTransactions(transaction.getRecurrency());
+            var transactions = recurrencyService.createTransactions(transaction);
             var savedTransactions = transactionRepository.saveAll(TransactionMapper.INSTANCE.transactionsToEntityList(transactions));
 
             return savedTransactions.iterator().next();

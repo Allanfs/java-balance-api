@@ -8,41 +8,38 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.github.allanfs.balanceapi.domain.model.Transaction;
-import com.github.allanfs.balanceapi.domain.model.TransactionRecurrency;
 
 @Service
 public class RecurrencyService {
-    
-    List<Transaction> createTransactions(TransactionRecurrency rec) {
 
+    List<Transaction> createTransactions(Transaction tre) {
         ArrayList<Transaction> transactions = new ArrayList<Transaction>();
-        var installmentAmount = rec.getOriginalTransaction().getAmount() / rec.getTotalInstallments();
+        var installmentAmount = tre.getAmountPerInstallment();
 
-        for (int i = 1; i <= rec.getTotalInstallments(); i++) {
+        var transactionRecurrecy = tre.getRecurrency();
+        for (int i = 0; i < transactionRecurrecy.getTotalInstallments(); i++) {
             Transaction transaction = new Transaction();
             
             try {
-                BeanUtils.copyProperties(transaction, rec.getOriginalTransaction());
+                BeanUtils.copyProperties(transaction, tre);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
             transactions.add(transaction);
 
-
-            Transaction prevTransaction= transaction;
-            if (i > 1) {
-                prevTransaction = transactions.get(i-2);
-                transaction.setExpiresIn( rec.getRecurrency().Increment(prevTransaction.getExpiresIn()) );
+            if (i >0) {
+                Transaction prevTransaction=transactions.get(i-1);
+                transaction.setExpiresIn( transactionRecurrecy.getRecurrency().Increment(prevTransaction.getExpiresIn()) );
             }
 
-            transaction.setName(newInstallmentName(transaction.getName(),i, rec.getTotalInstallments()));
+            transaction.setName(newInstallmentName(transaction.getName(),i+1, transactionRecurrecy.getTotalInstallments()));
             transaction.setAmount(installmentAmount);
 
         }
 
         return transactions;
     }
-
+    
     private String newInstallmentName(String origName, int current, int total) {
         var sb = new StringBuilder(origName + " ");
         sb.append(current).append("/").append(total);

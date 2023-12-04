@@ -17,7 +17,6 @@ public class TransactionRecurrency {
     // vencimento da primeira parcela
     private Date expiresIn;
 
-    private Transaction originalTransaction;
 
     String String() {
         return String.format("totalAmount dividido em %d com recorrencia %s", totalInstallments, recurrency.toString() );
