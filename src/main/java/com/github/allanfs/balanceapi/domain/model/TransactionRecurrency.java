@@ -20,6 +20,6 @@ public class TransactionRecurrency {
     private Transaction originalTransaction;
 
     String String() {
-        return "totalAmount dividido em totalInstallments com recorrencia recurrencyType";
+        return String.format("totalAmount dividido em %d com recorrencia %s", totalInstallments, recurrency.toString() );
     }
 }

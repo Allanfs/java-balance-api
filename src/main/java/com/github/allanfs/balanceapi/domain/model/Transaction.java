@@ -19,4 +19,11 @@ public class Transaction {
     public boolean hasRecurrency() {
         return recurrency != null;
     }
+
+    public float getAmountPerInstallment() {
+        if (!this.hasRecurrency()) {
+            return this.amount;
+        }
+        return amount / recurrency.getTotalInstallments();
+    }
 }
